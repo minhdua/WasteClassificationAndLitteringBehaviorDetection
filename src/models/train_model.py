@@ -1,5 +1,7 @@
-from src.models.classification_model import train_classification_model
-from src.models.detection_model import train_detection_model
+from classification_model import train_classification_model
+from detection_model import train_detection_model
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 def train_models(image_data_dir, video_data_dir, model_save_dir):
     # Huấn luyện mô hình phân loại rác thải

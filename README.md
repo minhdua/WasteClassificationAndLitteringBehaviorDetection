@@ -11,7 +11,7 @@ Dự án "Phân Loại Rác Thải và Phát Hiện Hành Vi Vứt Rác" sử d�
 3. Đảm bảo bạn có đủ dữ liệu để huấn luyện mô hình trong thư mục `data/`.
 
 ## Cấu Trúc Thư Mục
-Giải thích ngắn gọn về cấu trúc thư mục trong dự án:
+Dưới đây là mô tả ngắn gọn về cấu trúc thư mục trong dự án:
 
 - `src/`: Chứa tất cả mã nguồn.
 - `data_preprocessing/`: Scripts tiền xử lý dữ liệu.
@@ -25,12 +25,12 @@ Giải thích ngắn gọn về cấu trúc thư mục trong dự án:
 ## Cách Sử Dụng
 Hướng dẫn cách chạy các script chính:
 
-- Mô tả cách chạy tiền xử lý dữ liệu.
-- Mô tả cách huấn luyện mô hình.
-- Hướng dẫn cách sử dụng mô hình đã huấn luyện để phân loại rác thải và phát hiện hành vi vứt rác.
+1. **Tiền Xử Lý Dữ Liệu**: Sử dụng các script trong thư mục `data_preprocessing` để tiền xử lý hình ảnh và video.
+2. **Huấn Luyện Mô Hình**: Chạy `src/models/train_model.py` để huấn luyện mô hình phân loại rác và phát hiện hành vi vứt rác.
+3. **Sử Dụng Mô Hình Đã Huấn Luyện**: Dùng `src/main.py` để áp dụng các mô hình đã huấn luyện vào việc phân loại rác thải và phát hiện hành vi vứt rác.
 
 ## Đóng Góp
-Thông tin về cách đóng góp cho dự án, nếu bạn muốn mọi người cùng tham gia phát triển.
+Chúng tôi hoan nghênh mọi đóng góp cho dự án. Để biết thêm thông tin, vui lòng xem phần "Đóng Góp" trong tài liệu.
 
 ## Liên Hệ
-Thông tin liên hệ nếu người dùng cần trợ giúp hoặc muốn liên lạc với bạn.
+Nếu bạn cần trợ giúp hoặc muốn liên lạc với chúng tôi, vui lòng gửi email đến [địa chỉ email của bạn] hoặc liên hệ qua [phương thức liên lạc khác].

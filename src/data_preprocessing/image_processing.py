@@ -36,23 +36,44 @@ def process_image(file_path, target_size=(224, 224)):
     :return: Hình ảnh sau khi tiền xử lý.
     """
     image = cv2.imread(file_path)
+    if image is None:
+        print(f"Cannot read image: {file_path}")
+        return None, None
     image_resized = resize_image(image, target_size)
     image_augmented = augment_image(image_resized)
     return image_resized, image_augmented
 
-def main():
-    image_directory = '../data/images/training'  # Thay thế bằng đường dẫn thực tế
-    processed_directory = '../data/images/processed'  # Thay thế bằng đường dẫn lưu hình ảnh sau khi xử lý
+def process_images_recursively(image_directory, processed_directory):
+    for root, dirs, files in os.walk(image_directory):
+        for filename in files:
+            if filename.endswith('.jpg') or filename.endswith('.png'):
+                file_path = os.path.join(root, filename)
+                process_and_save_image(file_path, image_directory, processed_directory)
+        
 
-    for filename in os.listdir(image_directory):
-        if filename.endswith('.jpg') or filename.endswith('.png'):
-            file_path = os.path.join(image_directory, filename)
-            image_resized, image_augmented = process_image(file_path)
-            
-            # Lưu hình ảnh đã tiền xử lý
-            cv2.imwrite(os.path.join(processed_directory, 'resized_' + filename), image_resized)
-            cv2.imwrite(os.path.join(processed_directory, 'augmented_' + filename), image_augmented[0])
-            cv2.imwrite(os.path.join(processed_directory, 'augmented_flipped_' + filename), image_augmented[1])
+def process_and_save_image(file_path, image_directory, processed_directory):
+    if not os.path.exists(file_path):
+        print(f"File not found: {file_path}")
+        return
+    image_resized, image_augmented = process_image(file_path)
+    
+    # Tạo đường dẫn mới trong thư mục xử lý
+    processed_subdirectory = os.path.join(processed_directory, os.path.relpath(os.path.dirname(file_path), image_directory))
+    os.makedirs(processed_subdirectory, exist_ok=True)
+
+    # Lưu hình ảnh đã tiền xử lý
+    filename = os.path.basename(file_path)
+    cv2.imwrite(os.path.join(processed_subdirectory, 'resized_' + filename), image_resized)
+    cv2.imwrite(os.path.join(processed_subdirectory, 'augmented_' + filename), image_augmented[0])
+    cv2.imwrite(os.path.join(processed_subdirectory, 'augmented_flipped_' + filename), image_augmented[1])
+
+def main():
+    image_directory = 'data/images/raw'  # Thay thế bằng đường dẫn thực tế
+    processed_directory = 'data/images/processed'  # Thay thế bằng đường dẫn lưu hình ảnh sau khi xử lý
+
+    process_images_recursively(image_directory, processed_directory)
+
+
 
 if __name__ == '__main__':
     main()

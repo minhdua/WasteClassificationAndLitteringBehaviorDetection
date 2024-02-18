@@ -80,6 +80,9 @@ def train_classification_model(model_type, train_data_dir, validation_data_dir, 
         target_size=(150, 150),
         batch_size=32,
         class_mode='categorical')
+    
+    # Biên dịch mô hình
+    model.compile(optimizer='adam', loss='categorical_crossentropy')
 
     # Huấn luyện mô hình
     model.fit(
