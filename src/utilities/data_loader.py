@@ -119,10 +119,17 @@ def clear_directory(directory):
           print(f'Failed to delete {file_path}. Reason: {e}')
 
 def save_images(images, labels, directory):
-  clear_directory(directory)  # Xóa dữ liệu cũ
-  for i, image in enumerate(images):
-      image_name = labels[i]['image_name']
-      cv2.imwrite(os.path.join(directory, f'image_{i}_{image_name}.png'), image)
+    clear_directory(directory)  # Xóa dữ liệu cũ
+    for i, image in enumerate(images):
+        label = labels[i]['label']
+        image_name = labels[i]['image_name']
+        
+        # Create a subdirectory for this label, if it doesn't already exist
+        label_directory = os.path.join(directory, label)
+        os.makedirs(label_directory, exist_ok=True)
+        
+        # Save the image in the label subdirectory
+        cv2.imwrite(os.path.join(label_directory, f'image_{i}_{image_name}.png'), image)
 
 def split_dataset(images, labels, train_ratio=0.8, validation_ratio=0.1):
   num_samples = len(images)
