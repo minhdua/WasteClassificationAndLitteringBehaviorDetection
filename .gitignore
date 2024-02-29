@@ -3,7 +3,10 @@ venv/
 .treeignore
 project_content.txt
 data/images/
+data/videos/
 
+# run 
+runs/
 tree.py
 # Các tập tin được biên dịch
 __pycache__/
